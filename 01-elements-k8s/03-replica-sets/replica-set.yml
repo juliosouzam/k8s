@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: my-replica-set
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: my-web # must be equal to line 12
+  template:
+    metadata:
+      labels:
+        app: my-web # must be equal to line 8
+    spec:
+      containers:
+      - name: my-web
+        image: nginx
+        ports:
+          - containerPort: 80

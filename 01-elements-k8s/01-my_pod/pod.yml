@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod # Name of the pod mustn't be empty or have an underscore. e.g. my-pod
+spec:
+  containers:
+    - name: my-container # Name of the container mustn't be empty or have an underscore. e.g. my-container
+      image: nginx
+      ports:
+        - containerPort: 80
