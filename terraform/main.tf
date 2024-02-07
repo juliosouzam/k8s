@@ -35,7 +35,7 @@ variable "k8s_region" {
 
 variable "k8s_version" {
   type    = string
-  default = "1.29.0-do.0"
+  default = "1.29.1-do.0"
 }
 
 variable "k8s_node_size" {

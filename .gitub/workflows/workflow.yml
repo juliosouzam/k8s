@@ -1,0 +1,50 @@
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "node_app/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v4
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: juliocesar/app
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: ./node_app
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Save DigitalOcean kubeconfig with short-lived credentials
+        run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 k8s-default
+
+      - name: Deploy to DigitalOcean Kubernetes Deployment
+        run: kubectl apply -f $GITHUB_WORKSPACE/node_app/k8s/api/deployment.yml
+
+      - name: Deploy to DigitalOcean Kubernetes Service
+        run: kubectl apply -f $GITHUB_WORKSPACE/node_app/k8s/api/service.yml
+
+      - name: Verify deployment
+        run: kubectl rollout status deployment/api-deployment
