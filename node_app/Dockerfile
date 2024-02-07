@@ -17,7 +17,7 @@ WORKDIR /app
 COPY --from=builder ./app/package*.json ./
 COPY --from=builder ./app/dist ./dist
 
-RUN npm install --production && ls -lah
+RUN npm install --production
 
 EXPOSE 3000
 
