@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-deployment
+spec:
+  selector:
+    matchLabels:
+      app: mongo-db
+  template:
+    metadata:
+      labels:
+        app: mongo-db
+    spec:
+      containers:
+        - name: mongo-container
+          image: mongo
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 27017
+          envFrom:
+            - secretRef:
+                name: mongodb-secret
+          # envFrom:
+          #   - configMapRef:
+          #       name: mongodb-configmap
+          # env:
+          # - name: <app env name>
+          #   valueFrom:
+          #     configMapKeyRef:
+          #       key: <configmap env name>
+          #       name: mongodb-configmap
