@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment-app
+  namespace: production # It's not recommended to use like this, because we want to reuse the same deployment instance across namespaces
+spec:
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-container
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
