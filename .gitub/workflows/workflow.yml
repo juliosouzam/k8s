@@ -1,3 +1,5 @@
+name: Deploy API on K8S
+
 on:
   push:
     branches:
