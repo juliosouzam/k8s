@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: my-api
-          image: juliocesar/app:latest
+          image: juliocesar/app:main
           imagePullPolicy: Always
           env:
             - name: MONGO_HOST
