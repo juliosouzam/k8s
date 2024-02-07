@@ -13,6 +13,7 @@ const fastify = Fastify({
 
 fastify.get("/healthcheck", (request, reply) => {
 	return reply.send({
+		uptime: process.uptime(),
 		hostname: os.hostname(),
 		arch: os.arch(),
 		homedir: os.homedir(),
@@ -22,6 +23,7 @@ fastify.get("/healthcheck", (request, reply) => {
 		tmpdir: os.tmpdir(),
 		userInfo: os.userInfo(),
 		cpus: os.cpus(),
+		cpfUsage: process.cpuUsage(),
 	});
 });
 
