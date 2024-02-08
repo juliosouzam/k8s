@@ -16,13 +16,13 @@ spec:
           image: juliocesar/app:main
           imagePullPolicy: Always
 
-          startupProbe:
-            httpGet:
-              path: /healthcheck
-              port: 80
-              scheme: HTTP
-            periodSeconds: 10
-            failureThreshold: 3
+          # startupProbe:
+          #   httpGet:
+          #     path: /healthcheck
+          #     port: 80
+          #     scheme: HTTP
+          #   periodSeconds: 10
+          #   failureThreshold: 3
 
           livenessProbe:
             httpGet:
