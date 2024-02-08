@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: resource-service
+spec:
+  selector:
+    app: resource
+  ports:
+    - port: 80 # service port
+      targetPort: 8080 # target port of container
+  type: LoadBalancer

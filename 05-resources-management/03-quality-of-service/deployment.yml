@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: resource-deployment
+spec:
+  selector:
+    matchLabels:
+      app: resource
+  template:
+    metadata:
+      labels:
+        app: resource
+    spec:
+      containers:
+        - name: resource-container
+          image: gcr.io/k8s-staging-e2e-test-images/resource-consumer:1.9
+          resources:
+            requests:
+              cpu: 100m # 1000m it's equals to 1 core of CPU, 100m it's 10%
+              memory: 32Mi
+            limits:
+              memory: "64Mi"
+              cpu: "500m"
+          command:
+            - /consumer
+            - -port
+            - "8080"
+          ports:
+            - containerPort: 8080
