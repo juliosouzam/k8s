@@ -12,9 +12,11 @@ provider "digitalocean" {
 }
 
 resource "digitalocean_kubernetes_cluster" "k8s_cluster" {
-  name    = "k8s-${terraform.workspace}"
-  region  = var.k8s_region
-  version = var.k8s_version
+  name         = "k8s-${terraform.workspace}"
+  region       = var.k8s_region
+  version      = var.k8s_version
+  auto_upgrade = false
+  ha           = false
 
   node_pool {
     name       = "default"
