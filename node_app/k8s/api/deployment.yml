@@ -16,30 +16,30 @@ spec:
           image: juliocesar/app:main
           imagePullPolicy: Always
 
-          # startupProbe:
-          #   httpGet:
-          #     path: /healthcheck
-          #     port: 80
-          #     scheme: HTTP
-          #   periodSeconds: 10
-          #   failureThreshold: 3
+          startupProbe:
+            httpGet:
+              path: /healthcheck
+              port: 3000 # must be the port of container
+              scheme: HTTP
+            periodSeconds: 10
+            failureThreshold: 3
 
-          # livenessProbe:
-          #   httpGet:
-          #     path: /healthcheck # should be different liveness and readiness
-          #     port: 80
-          #     scheme: HTTP
-          #   initialDelaySeconds: 10 # seconds to wait for the application to be up
-          #   periodSeconds: 10 #
-          #   timeoutSeconds: 2 # timeout in seconds
-          #   failureThreshold: 2 # quantity of failures
-          #   successThreshold: 1 # quantity of successes
+          livenessProbe:
+            httpGet:
+              path: /healthcheck # should be different liveness and readiness
+              port: 3000 # must be the port of container
+              scheme: HTTP
+            initialDelaySeconds: 10 # seconds to wait for the application to be up
+            periodSeconds: 10 #
+            timeoutSeconds: 2 # timeout in seconds
+            failureThreshold: 2 # quantity of failures
+            successThreshold: 1 # quantity of successes
 
-          # readinessProbe:
-          #   httpGet:
-          #     path: /healthcheck # should be different liveness and readiness
-          #     port: 80
-          #     scheme: HTTP
+          readinessProbe:
+            httpGet:
+              path: /healthcheck # should be different liveness and readiness
+              port: 3000 # must be the port of container
+              scheme: HTTP
 
           env:
             - name: MONGO_HOST
