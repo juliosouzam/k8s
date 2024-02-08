@@ -20,7 +20,7 @@ spec:
             httpGet:
               path: /healthcheck
               port: 80
-              schema: HTTP
+              scheme: HTTP
             periodSeconds: 10
             failureThreshold: 3
 
