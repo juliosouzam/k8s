@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: httpd-deployment
+spec:
+  replicas: 9
+  selector:
+    matchLabels:
+      app: api-app
+      tag: httpd
+  template:
+    metadata:
+      labels:
+        app: api-app
+        tag: httpd
+    spec:
+      containers:
+        - name: httpd-app
+          image: httpd
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  [
+                    "sh",
+                    "-c",
+                    "echo $(hostname) > /usr/local/apache2/htdocs/index.html",
+                  ]
+          resources:
+            limits:
+              memory: "64Mi"
+              cpu: "100m"
+          ports:
+            - containerPort: 80

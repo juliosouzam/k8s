@@ -1,0 +1,5 @@
+mongodb:
+  tag: latest
+
+storage:
+  className: do-block-storage-retain

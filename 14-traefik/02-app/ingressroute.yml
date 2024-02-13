@@ -1,0 +1,17 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-ingress-route
+  # namespace: traefik
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`jsdtech.app`) # && Headers(`UserKey`, 'test')
+      kind: Rule
+      services:
+        - name: nginx-svc
+          port: 80
+      middlewares:
+        - name: traefik-ratelimit
+        # - name: redirect-to-https
