@@ -4,7 +4,7 @@ metadata:
   name: mongodb-persistent-volume-claim-digital-ocean
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteOnce # ReadWriteOnce, ReadOnlyMany or ReadWriteMany
   storageClassName: do-block-storage-retain
   resources:
     requests:

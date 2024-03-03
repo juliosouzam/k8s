@@ -10,7 +10,7 @@ spec:
     storage: 10Gi
   volumeMode: Filesystem
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteOne # ReadWriteOnce, ReadOnlyMany or ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   hostPath:
    path: "/volumes/mongodb"

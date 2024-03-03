@@ -7,7 +7,7 @@ spec:
     matchLabels:
       type: local
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany # ReadWriteOnce, ReadOnlyMany or ReadWriteMany
   storageClassName: manual
   resources:
     requests:
